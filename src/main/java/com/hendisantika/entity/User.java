@@ -25,21 +25,23 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
-@EqualsAndHashCode(exclude = "publishers")
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     @GenericGenerator(
-            name = "book_seq",
+            name = "user_seq",
             strategy = "com.hendisantika.util.DatePrefixedSequenceIdGenerator",
             parameters = {@Parameter(name = DatePrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50")})
-
     private String id;
 
     @Column
     private String fullName;
 
+    public User(String fullName) {
+        this.fullName = fullName;
+    }
 }
